@@ -1,5 +1,7 @@
 package vn.hoidanit.laptopshop.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,9 @@ public class UserController {
 
     @RequestMapping("/") // gui yeu cau den sever
     public String getHomePage(Model model) {
+        List<User> arrUsers = userService.getAllUsersByEmail("odinkun20303@gmail.com");
+        System.out.println(arrUsers);
+
         model.addAttribute("eric", "test");
         return "hello"; // return ve file view nhu html,jsp,... tuc la khi vao url "/" thi se hien thi
                         // file view ma chung ta return

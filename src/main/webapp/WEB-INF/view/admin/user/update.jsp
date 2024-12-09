@@ -21,16 +21,17 @@
                 <div class="container mt-5">
                     <div class="row">
                         <div class="col-md-6 col-12 mx-auto">
-                            <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                            <h2>Update user</h2>
+                            <hr>
+                            <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
+                                <div class="mb-3" style="display: none;">
+                                    <label for="exampleInputId" class="form-label">Id</label>
+                                    <form:input type="text" class="form-control" id="exampleInputId" path="id" />
+                                </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                                     <form:input type="email" class="form-control" id="exampleInputEmail1"
-                                        path="email" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <form:input type="password" class="form-control" id="exampleInputPassword1"
-                                        path="password" />
+                                        disabled="true" path="email" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPhoneNumber" class="form-label">Phone number</label>
@@ -47,7 +48,7 @@
                                     <form:input type="text" class="form-control" id="exampleInputAddress"
                                         path="address" />
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-warning">Update</button>
                             </form:form>
                         </div>
                     </div>

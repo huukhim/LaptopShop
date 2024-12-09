@@ -14,5 +14,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // day la function, kphai la bien'
     User save(User hoidanit); // == insert into user value()
 
+    User findById(long id);
+
+    List<User> findAll();
+
     List<User> findByEmail(String email);
+
+    void deleteById(long id);
 }

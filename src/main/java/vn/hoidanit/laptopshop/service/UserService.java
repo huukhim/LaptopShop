@@ -16,6 +16,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
@@ -27,6 +31,10 @@ public class UserService {
     public User handleSaveUser(User user) {
         return userRepository.save(user);// mặc dù trả về user và không gán nhưng nó vẫn làm công việc save user của
                                          // mình
+    }
+
+    public void deleteUserById(long id) {
+        this.userRepository.deleteById(id);
     }
 
 }

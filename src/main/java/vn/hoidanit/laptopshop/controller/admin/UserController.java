@@ -92,17 +92,29 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable long id) {
         User currentUser = this.userService.getUserById(id);
         model.addAttribute("newUser", currentUser);
+
+        // tu lam
+        if (currentUser.getAvatar() != null) {
+            String avatarPath = uploadService.handleDisplayUploadedFile(currentUser.getAvatar(), "avatar");
+            model.addAttribute("avatar", avatarPath);
+        }
+
         return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
-    public String getUpdateUser(Model model, @ModelAttribute("newUser") User updatedUser) {
+    public String getUpdateUser(Model model, @ModelAttribute("newUser") User updatedUser,
+            @RequestParam("imageFile") MultipartFile file) {
         User currentUser = this.userService.getUserById(updatedUser.getId());
 
         if (currentUser != null) {
             currentUser.setFullName(updatedUser.getFullName());
             currentUser.setPhone(updatedUser.getPhone());
             currentUser.setAddress(updatedUser.getAddress());
+            currentUser.setRole(userService.getRoleByName(updatedUser.getRole().getName()));
+
+            String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+            currentUser.setAvatar(avatar);
 
             this.userService.handleSaveUser(currentUser);
         }

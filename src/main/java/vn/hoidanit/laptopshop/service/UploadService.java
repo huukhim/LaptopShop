@@ -45,4 +45,9 @@ public class UploadService {
         }
         return finalName;
     }
+
+    public String handleDisplayUploadedFile(String fileName, String targetFolder) {
+        String rootPath = this.servletContext.getRealPath("/resources/images");
+        return rootPath + File.separator + targetFolder + File.separator + fileName;
+    }
 }

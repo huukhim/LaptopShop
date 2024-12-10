@@ -13,6 +13,17 @@
                 <title>Update user - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile"); //lay bien voi id = avatarFile
+                        avatarFile.change(function (e) { //khi file bi thay doi
+                            const imgURL = URL.createObjectURL(e.target.files[0]); //lay duong link url bang web api co' san~
+                            $("#avatarPreview").attr("src", imgURL); //them gia tri cho property src(nguon anh)
+                            $("#avatarPreview").css({ "display": "block" }); //style display block != none
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -33,7 +44,7 @@
                                             <h2>Update user</h2>
                                             <hr>
                                             <form:form method="post" action="/admin/user/update"
-                                                modelAttribute="newUser">
+                                                modelAttribute="newUser" class="row" enctype="multipart/form-data">
                                                 <div class="mb-3" style="display: none;">
                                                     <label for="exampleInputId" class="form-label">Id</label>
                                                     <form:input type="text" class="form-control" id="exampleInputId"
@@ -62,7 +73,26 @@
                                                     <form:input type="text" class="form-control"
                                                         id="exampleInputAddress" path="address" />
                                                 </div>
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="formSelectRole" class="form-label">Role</label>
+                                                    <form:select class="form-select" id="formSelectRole"
+                                                        path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Update avatar</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="imageFile" />
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px;" alt="${avatar}" id="avatarPreview"
+                                                        src="${avatar}" />
+                                                </div>
+                                                <div class="col-12 mb-5">
+                                                    <button type="submit" class="btn btn-warning">Update</button>
+                                                </div>
                                             </form:form>
                                         </div>
                                     </div>

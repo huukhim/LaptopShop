@@ -13,6 +13,17 @@
                 <title>Create user - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile"); //lay bien voi id = avatarFile
+                        avatarFile.change(function (e) { //khi file bi thay doi
+                            const imgURL = URL.createObjectURL(e.target.files[0]); //lay duong link url bang web api co' san~
+                            $("#avatarPreview").attr("src", imgURL); //them gia tri cho property src(nguon anh)
+                            $("#avatarPreview").css({ "display": "block" }); //style display block != none
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -31,50 +42,56 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <form:form method="post" action="/admin/user/create"
-                                                modelAttribute="newUser">
-                                                <div class="mb-3">
+                                                modelAttribute="newUser" class="row" enctype="multipart/form-data">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="exampleInputEmail1" class="form-label">Email
                                                         address</label>
                                                     <form:input type="email" class="form-control"
                                                         id="exampleInputEmail1" path="email" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="exampleInputPassword1"
                                                         class="form-label">Password</label>
                                                     <form:input type="password" class="form-control"
                                                         id="exampleInputPassword1" path="password" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="exampleInputPhoneNumber" class="form-label">Phone
                                                         number</label>
                                                     <form:input type="number" class="form-control"
                                                         id="exampleInputPhoneNumber" path="phone" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="exampleInputFullname" class="form-label">Full
                                                         name</label>
                                                     <form:input type="text" class="form-control"
                                                         id="exampleInputFullname" path="fullName" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12">
                                                     <label for="exampleInputAddress" class="form-label">Address</label>
                                                     <form:input type="text" class="form-control"
                                                         id="exampleInputAddress" path="address" />
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label for="formSelectRole" class="form-label">ROLE:</label>
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="formSelectRole">
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="formSelectRole" class="form-label">Role</label>
+                                                    <form:select class="form-select" id="formSelectRole"
+                                                        path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label for="formFile" class="form-label">Chose file</label>
-                                                    <input class="form-control" type="file" id="formFile">
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="imageFile" />
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview" />
+                                                </div>
+                                                <div class="col-12 mb-5">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
                                             </form:form>
                                         </div>
                                     </div>
